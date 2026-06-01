@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copa do Mundo 2026 - Acompanhamento Ao Vivo</title>
+    <meta name="description" content="Acompanhe a Copa do Mundo 2026 em tempo real. Placares, classificação, estatísticas e onde assistir.">
+    <meta property="og:title" content="Copa do Mundo 2026 - Acompanhamento Ao Vivo">
+    <meta property="og:description" content="Placares ao vivo, classificação e estatísticas da Copa 2026">
+    <meta property="og:type" content="website">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="css/custom.css rel="stylesheet">
+    
+<base target="_blank">
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    <header>
+        <div class="header-top">
+            <span>🏆 FIFA World Cup 2026</span>
+            <span>11 de Junho - 19 de Julho de 2026</span>
+        </div>
+        <div class="header-main">
+            <div class="logo-section">
+                <div class="world-cup-badge">
+                    <span class="trophy-icon">🏆</span>
+                    <div class="title-group">
+                        <h1>Copa do Mundo 2026</h1>
+                        <div class="subtitle">Estados Unidos • Canadá • México</div>
+                    </div>
+                </div>
+            </div>
+            <div class="countdown-section" id="countdown">
+                <div class="countdown-item"><span class="number" id="days">10</span><span class="label">Dias</span></div>
+                <div class="countdown-item"><span class="number" id="hours">00</span><span class="label">Horas</span></div>
+                <div class="countdown-item"><span class="number" id="minutes">00</span><span class="label">Minutos</span></div>
+                <div class="countdown-item"><span class="number" id="seconds">00</span><span class="label">Segundos</span></div>
+            </div>
+            <div class="host-info">
+                <span>🇺🇸 16 cidades</span><span>🏟️ 48 seleções</span><span>⚽ 104 jogos</span><span>🌎 3 países</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="api-status-bar">
+        <div class="status-indicator">
+            <span class="status-dot" id="api-status-dot"></span>
+            <span id="api-status-text">Desconectado - Usando dados offline</span>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <input type="text" class="api-key-input" id="api-key-input" placeholder="Cole sua API Key (API-Football)">
+            <button class="btn-connect" onclick="connectAPI()">Conectar API</button>
+        </div>
+        <span class="last-update" id="last-update"></span>
+    </div>
+
+    <nav class="nav-tabs">
+        <button class="nav-tab active" onclick="showTab('jogos')">⚽ Jogos</button>
+        <button class="nav-tab" onclick="showTab('grupos')">📊 Grupos</button>
+        <button class="nav-tab" onclick="showTab('estatisticas')">📈 Estatísticas</button>
+        <button class="nav-tab" onclick="showTab('onde-assistir')">📺 Onde Assistir</button>
+    </nav>
+
+    <main>
+        <div id="jogos" class="tab-content active">
+            <h2 class="section-title"><span class="icon">⚽</span> Jogos Ao Vivo</h2>
+            <div class="matches-grid" id="matches-live"></div>
+            <h2 class="section-title"><span class="icon">📅</span> Próximos Jogos</h2>
+            <div class="matches-grid" id="matches-upcoming"></div>
+            <h2 class="section-title"><span class="icon">✅</span> Jogos Encerrados</h2>
+            <div class="matches-grid" id="matches-finished"></div>
+        </div>
+        <div id="grupos" class="tab-content">
+            <h2 class="section-title"><span class="icon">📊</span> Classificação dos Grupos</h2>
+            <div class="groups-grid" id="groups-container"></div>
+        </div>
+        <div id="estatisticas" class="tab-content">
+            <h2 class="section-title"><span class="icon">📈</span> Estatísticas da Copa</h2>
+            <div class="stats-grid" id="stats-container"></div>
+        </div>
+        <div id="onde-assistir" class="tab-content">
+            <div class="broadcast-section">
+                <div class="broadcast-title">📺 Onde Assistir a Copa 2026</div>
+                <div class="broadcast-subtitle">Transmissões oficiais e licenciadas da FIFA World Cup 2026</div>
+                <div class="broadcast-channels">
+                    <div class="channel-badge"><span style="font-size:1.5rem">🇧🇷</span><div><div style="font-weight:700">Brasil</div><div style="font-size:0.8rem;opacity:0.7">Globo, Cazé TV, Sportv</div></div></div>
+                    <div class="channel-badge"><span style="font-size:1.5rem">🇺🇸</span><div><div style="font-weight:700">Estados Unidos</div><div style="font-size:0.8rem;opacity:0.7">Fox Sports, Telemundo</div></div></div>
+                    <div class="channel-badge"><span style="font-size:1.5rem">🇬🇧</span><div><div style="font-weight:700">Reino Unido</div><div style="font-size:0.8rem;opacity:0.7">BBC, ITV</div></div></div>
+                    <div class="channel-badge"><span style="font-size:1.5rem">🇪🇸</span><div><div style="font-weight:700">Espanha</div><div style="font-size:0.8rem;opacity:0.7">RTVE, Mediapro</div></div></div>
+                    <div class="channel-badge"><span style="font-size:1.5rem">🇩🇪</span><div><div style="font-weight:700">Alemanha</div><div style="font-size:0.8rem;opacity:0.7">ARD, ZDF, RTL</div></div></div>
+                    <div class="channel-badge"><span style="font-size:1.5rem">🇫🇷</span><div><div style="font-weight:700">França</div><div style="font-size:0.8rem;opacity:0.7">TF1, beIN Sports</div></div></div>
+                    <div class="channel-badge"><span style="font-size:1.5rem">🇦🇷</span><div><div style="font-weight:700">Argentina</div><div style="font-size:0.8rem;opacity:0.7">TyC Sports, TV Pública</div></div></div>
+                    <div class="channel-badge"><span style="font-size:1.5rem">🇲🇽</span><div><div style="font-weight:700">México</div><div style="font-size:0.8rem;opacity:0.7">Televisa, TV Azteca</div></div></div>
+                </div>
+            </div>
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 20px;">
+                <h3 style="margin-bottom: 15px; color: var(--accent);">ℹ️ Informações Importantes</h3>
+                <ul style="list-style: none; padding: 0; line-height: 2;">
+                    <li>✅ <strong>Transmissões oficiais</strong> possuem os direitos exclusivos da FIFA</li>
+                    <li>✅ <strong>Streaming gratuito</strong> disponível em alguns países via emissoras públicas</li>
+                    <li>✅ <strong>FIFA+</strong> pode oferecer conteúdo complementar em algumas regiões</li>
+                    <li>⚠️ <strong>Evite sites piratas</strong> - além de ilegal, pode conter malware</li>
+                    <li>💡 <strong>VPN</strong> pode permitir acesso a transmissões gratuitas de outros países</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="share-modal">
+        <div class="share-modal">
+            <h3>🔗 Compartilhar Resultado</h3>
+            <div class="match-preview" id="share-match-preview"></div>
+            <div class="share-buttons">
+                <a href="#" class="share-btn-social twitter" id="share-twitter" target="_blank"><span>🐦</span> Twitter/X</a>
+                <a href="#" class="share-btn-social whatsapp" id="share-whatsapp" target="_blank"><span>💬</span> WhatsApp</a>
+                <a href="#" class="share-btn-social facebook" id="share-facebook" target="_blank"><span>📘</span> Facebook</a>
+                <a href="#" class="share-btn-social telegram" id="share-telegram" target="_blank"><span>✈️</span> Telegram</a>
+                <button class="share-btn-social copy" onclick="copyToClipboard()"><span>📋</span> Copiar Link</button>
+                <button class="share-btn-social copy" onclick="copyTextResult()"><span>📝</span> Copiar Texto</button>
+            </div>
+            <div class="copy-feedback" id="copy-feedback">✅ Copiado para a área de transferência!</div>
+            <button class="close-btn" onclick="closeShareModal()">Fechar</button>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <footer>
+        <p>🏆 Copa do Mundo FIFA 2026 • Estados Unidos, Canadá e México by &copy; Finakorgo-<em> &reg;José Aparecido Finamor</em></p>
+        <p style="margin-top: 8px; font-size: 0.8rem;">Este site é apenas para acompanhamento de informações. Não transmitimos jogos.</p>
+        <p style="margin-top: 8px; font-size: 0.75rem; opacity: 0.6;">Dados via API-Football (api-sports.io) • Atualizado em tempo real</p>
+    </footer>
+    <script src="app/index.js"></script>
