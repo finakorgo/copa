@@ -81,7 +81,7 @@
         };
 
         // API Functions
-        /*    async function connectAPI() {
+           async function connectAPI() {
             const apiKey = document.getElementById('api-key-input').value.trim();
             if (!apiKey) { showToast('❌ Insira uma API Key válida'); return; }
             API_CONFIG.headers['x-apisports-key'] = apiKey;
@@ -136,7 +136,7 @@
                 }
                 document.getElementById('last-update').textContent = 'Última atualização: ' + new Date().toLocaleTimeString('pt-BR');
             } catch (error) { console.error('Error loading live data:', error); }
-        } */
+        } 
 
         function updateLiveMatches(apiMatches) {
             const container = document.getElementById('matches-live');
