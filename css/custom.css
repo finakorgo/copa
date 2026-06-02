@@ -51,6 +51,21 @@
         .match-status { display: flex; align-items: center; gap: 6px; font-weight: 600; }
         .status-live { color: var(--live); }
         .status-live .pulse { width: 8px; height: 8px; background: var(--live); border-radius: 50%; animation: pulse 2s infinite; }
+        .btn-dazn-live {
+              display: inline-block;
+              background: #00b341;
+              color: white;
+              padding: 14px 28px;
+              border-radius: 10px;
+             text-decoration: none;
+             font-weight: 700;
+             transition: all .3s ease;
+            }
+
+        .btn-dazn-live:hover {
+             transform: translateY(-2px);
+             opacity: .9;
+        }
         @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 var(--live-pulse); } 50% { opacity: 0.7; transform: scale(1.1); box-shadow: 0 0 0 8px transparent; } }
         .status-finished { color: var(--text-muted); }
         .status-upcoming { color: var(--accent); }
